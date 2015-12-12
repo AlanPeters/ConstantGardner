@@ -1,0 +1,24 @@
+POST  HTTP/1.1
+Host: my-garden-server.com/log_sensor
+Content-Type: application/json
+Cache-Control: no-cache
+
+{
+    "id":123,
+    "type":"Moisture",
+    "name":"Moisture Sensor Array 1",
+    "data": [
+        {   
+            "name":"topSensor",
+            "value":458
+        },
+        {
+            "name":"middleSensor",
+            "value":357
+        },
+        {
+            "name":"bottomSensor",
+            "value":292
+        }
+    ]
+}
