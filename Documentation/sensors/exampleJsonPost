@@ -7,18 +7,26 @@ Cache-Control: no-cache
     "id":123,
     "type":"Moisture",
     "name":"Moisture Sensor Array 1",
-    "data": [
-        {   
-            "name":"topSensor",
-            "value":458
-        },
+    
+    "data":
+    [
         {
-            "name":"middleSensor",
-            "value":357
-        },
-        {
-            "name":"bottomSensor",
-            "value":292
+            record-time:"2012-04-23T18:25:43.511Z",
+            data-point:
+            [
+                {   
+                    "name":"topSensor",
+                    "value":458
+                },
+                {
+                    "name":"middleSensor",
+                    "value":357
+                },
+                {
+                    "name":"bottomSensor",
+                    "value":292
+                }
+            ]
         }
     ]
 }
