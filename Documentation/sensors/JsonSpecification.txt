@@ -1,0 +1,34 @@
+JSON Specification
+
+id: A unique identifier for the device. 
+
+This id can be a mac address or other reasonably unique
+number. Two devices with the same id in the same account
+will be treated as the same device. 
+
+
+type: The classification of the device.
+
+Classifications can be used to identified the type of data.
+
+
+name: Name of the device.
+
+The name of this type. All devices of the same specification
+and manufacturer can have the same name. The name is not the
+unique name on the network. 
+
+
+data: Array of data to be uploaded.
+
+Array containing all of the data for upload. Each object in
+the array will contain a sensor name and a value. 
+
+
+time: Time the reading was taken. (Optional)
+
+Time of the sensor reading. The reading can be sent immediately
+upon completion or staged and sent along with additional
+records. If not identified the system time when the record
+is received by the server is used. 
+

@@ -4,29 +4,23 @@ Content-Type: application/json
 Cache-Control: no-cache
 
 {
-    "id":123,
+    "id":"1234-45687aB",
     "type":"Moisture",
-    "name":"Moisture Sensor Array 1",
-    
+    "name":"Moisture Sensor Stake Array",
+    "time":"2012-04-23T18:25:43.511Z",
     "data":
     [
         {
-            record-time:"2012-04-23T18:25:43.511Z",
-            data-point:
-            [
-                {   
-                    "name":"topSensor",
-                    "value":458
-                },
-                {
-                    "name":"middleSensor",
-                    "value":357
-                },
-                {
-                    "name":"bottomSensor",
-                    "value":292
-                }
-            ]
+            "name":"topSensor",
+            "value":"458"
+        },
+        {
+            "name":"middleSensor",
+            "value":"357"
+        },
+        {
+            "name":"bottomSensor",
+            "value":"292"
         }
     ]
 }
