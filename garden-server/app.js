@@ -5,12 +5,13 @@ const path         = require('path');
 const logger       = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser   = require('body-parser');
-let mongoose       = require('mongoose');
-mongoose.Promise = require('bluebird');
+const mongoose     = require('mongoose');
+mongoose.Promise   = require('bluebird');
 mongoose.connect('mongodb://localhost/garden');
 
-const routes = require('./routes/index');
-const sensors = require('./routes/sensors');
+const routes     = require('./routes/index');
+const sensors    = require('./routes/sensors');
+const sensorData = require('./routes/sensorData');
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/sensors', sensors);
+app.use('/sensorData', sensorData);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,11 +1,10 @@
-const express    = require('express');
-const router     = express.Router();
-//const sensorData = require('../controllers/sensorData');
-// FIXME use controller
-const sensorData = require('../models/sensorData');
+'use strict';
+const express = require('express');
+const router  = express.Router();
+const sensors = require('../controllers/sensors');
 
 router.post('/', function(req, res, next) {
-    return sensorData.create(req.body)
+    return sensors.insertData(req.body)
     .then(function(newDoc) {
         return res.json(newDoc);
     })
@@ -13,9 +12,11 @@ router.post('/', function(req, res, next) {
 });
 
 router.get('/', function(req, res, next) {
-});
-
-router.put('/', function(req, res, next) {
+    return sensors.getData(req.query)
+    .then(function(data) {
+        return res.json(data);
+    })
+    .catch(next);
 });
 
 module.exports = router;

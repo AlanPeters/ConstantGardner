@@ -1,3 +1,4 @@
+'use strict';
 const mongoose = require('mongoose');
 var Schema     = mongoose.Schema;
 
@@ -16,4 +17,4 @@ var sensorSchema = Schema({
     }
 });
 
-module.exports = mongoose.model('Sensor', sensorSchema, 'sensor');
+module.exports = mongoose.model('Sensors', sensorSchema, 'sensors');
