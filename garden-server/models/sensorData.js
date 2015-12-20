@@ -6,7 +6,7 @@ const Schema     = mongoose.Schema;
 const sensorDataSchema = Schema({
     sensor: {
         type: Schema.Types.ObjectId,
-        ref: 'sensors',
+        ref: 'Sensors',
         required: true
     },
     type: {
