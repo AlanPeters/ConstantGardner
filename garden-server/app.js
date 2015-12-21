@@ -12,6 +12,7 @@ mongoose.connect('mongodb://localhost/garden');
 const routes     = require('./routes/index');
 const sensors    = require('./routes/sensors');
 const sensorData = require('./routes/sensorData');
+const weather    = require('./routes/weather');
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/sensors', sensors);
 app.use('/sensorData', sensorData);
+app.use('/weather', weather);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
