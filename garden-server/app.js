@@ -9,7 +9,8 @@ const mongoose     = require('mongoose');
 mongoose.Promise   = require('bluebird');
 mongoose.connect('mongodb://localhost/garden');
 
-const routes     = require('./routes/index');
+const index      = require('./routes/index');
+const garden     = require('./routes/garden');
 const sensors    = require('./routes/sensors');
 const sensorData = require('./routes/sensorData');
 const weather    = require('./routes/weather');
@@ -28,7 +29,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+app.use('/', index);
+app.use('/garden', garden);
 app.use('/sensors', sensors);
 app.use('/sensorData', sensorData);
 app.use('/weather', weather);

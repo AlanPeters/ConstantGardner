@@ -1,6 +1,5 @@
 'use strict';
 const mongoose      = require('mongoose');
-mongoose.promise    = require('bluebird');
 const Schema        = mongoose.Schema;
 const locationTypes = ['indoor', 'outdoor'];
 
