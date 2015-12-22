@@ -13,7 +13,7 @@ function insertData(doc) {
 
 function getData(reqQuery) {
     var query = reqQuery || {};
-    return sensorData.find(query);
+    return sensorData.find(query).lean();
 }
 
 function getLatest(type) {
@@ -23,5 +23,6 @@ function getLatest(type) {
     return sensorData
     .findOne(query)
     .sort({ _id: -1 })
-    .populate('sensor');
+    .populate('sensor')
+    .lean();
 }
