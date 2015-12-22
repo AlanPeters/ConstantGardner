@@ -4,7 +4,7 @@ const passport = require('passport');
 const Account  = require('../models/account');
 const router   = express.Router();
 
-router.get('/', function (req, res) {
+router.get('/', function(req, res) {
     return res.render('index', { user : req.user });
 });
 
@@ -13,14 +13,14 @@ router.get('/register', function(req, res) {
 });
 
 router.post('/register', function(req, res) {
-    Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
+    Account.register(new Account({ username: req.body.username }), req.body.password, function(err, account) {
         if (err) {
-            return res.render('register', {info: 'Sorry. That username already exists. Try again.'});
+            return res.render('register', { info: 'Sorry. That username already exists. Try again.' });
+        } else {
+            passport.authenticate('local')(req, res, function() {
+                return res.redirect('/');
+            });
         }
-
-        passport.authenticate('local')(req, res, function () {
-            return res.redirect('/');
-        });
     });
 });
 

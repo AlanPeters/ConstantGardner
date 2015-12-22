@@ -1,3 +1,4 @@
+'use strict';
 const should   = require('should');
 const mongoose = require('mongoose');
 const Account  = require('../models/account.js');
@@ -7,12 +8,12 @@ describe('Account', function() {
 
     before(function(done) {
         db = mongoose.connect('mongodb://localhost/test');
-        done();
+        return done();
     });
 
     after(function(done) {
         mongoose.connection.close();
-        done();
+        return done();
     });
 
     beforeEach(function(done) {
@@ -22,9 +23,12 @@ describe('Account', function() {
         });
 
         account.save(function(error) {
-            if (error) console.log('error' + error.message);
-            else console.log('no error');
-            done();
+            if (error) {
+                console.log('error' + error.message);
+            } else {
+                console.log('no error');
+            }
+            return done();
         });
     });
 
@@ -32,13 +36,13 @@ describe('Account', function() {
         Account.findOne({ username: '12345' }, function(err, account) {
             account.username.should.eql('12345');
             console.log("   username: ", account.username);
-            done();
+            return done();
         });
     });
 
     afterEach(function(done) {
         Account.remove({}, function() {
-            done();
+            return done();
         });
     });
 
