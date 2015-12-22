@@ -1,16 +1,14 @@
 'use strict';
-const express      = require('express');
-const path         = require('path');
-//const favicon    = require('serve-favicon');
-const logger       = require('morgan');
-const cookieParser = require('cookie-parser');
-const bodyParser   = require('body-parser');
-
+const express       = require('express');
+const path          = require('path');
+//const favicon     = require('serve-favicon');
+const logger        = require('morgan');
+const cookieParser  = require('cookie-parser');
+const bodyParser    = require('body-parser');
 const passport      = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-
-const mongoose     = require('mongoose');
-mongoose.Promise   = require('bluebird');
+const mongoose      = require('mongoose');
+mongoose.Promise    = require('bluebird');
 
 const index      = require('./routes/index');
 const garden     = require('./routes/garden');
@@ -31,15 +29,13 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-
 app.use(require('express-session')({
-    secret: 'keyboard cat',
+    secret: 'peanut butter jelly time',
     resave: false,
     saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);

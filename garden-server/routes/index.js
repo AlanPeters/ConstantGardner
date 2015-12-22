@@ -4,11 +4,6 @@ const passport = require('passport');
 const Account  = require('../models/account');
 const router   = express.Router();
 
-/* GET home page. */
-//router.get('/', function(req, res, next) {
-    //return res.render('index', { title: 'Express' });
-//});
-
 router.get('/', function (req, res) {
     return res.render('index', { user : req.user });
 });
