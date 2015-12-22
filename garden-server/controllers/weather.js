@@ -10,8 +10,9 @@ module.exports = {
     getMyForecast: getMyForecast
 };
 
-function getMyForecast() {
-    return garden.findOne({}, { 'latitude': true, 'longitude': true }) //TODO may pass user's garden data in request, db hit may not be needed
+function getMyForecast(id) {
+    return garden.findById(id, { 'latitude': true, 'longitude': true })
+    .lean()
     .then(function(data) {
         return getForecast(data.latitude, data.longitude);
     });

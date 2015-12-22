@@ -8,12 +8,23 @@ const gardenSchema = Schema({
         type: String,
         required: true
     },
+    owner: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: 'Users'
+    },
     type: {
         type: String,
         enum: locationTypes
     },
     city: {
         type: String
+    },
+    state: {
+        type: String
+    },
+    zip: {
+        type: Number
     },
     address: {
         type: String
