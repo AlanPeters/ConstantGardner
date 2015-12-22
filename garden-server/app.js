@@ -38,19 +38,39 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use(function(req, res, next) {
+function checkAuthUser(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
     } else {
         return res.redirect('/');
     }
-});
-app.use('/garden', garden);
-app.use('/users', users);
-app.use('/sensors', sensors);
-app.use('/sensorData', sensorData);
-app.use('/weather', weather);
+}
+
+function checkAuthAPI(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    } else {
+        return res.status(401).send();
+    }
+}
+
+// index page for registration and login, no auth
+app.use('/', index);
+
+// app pages are user facing, check user auth and redirect to login
+// TODO 401 is for unauthorized request, aka, not logged in,
+// 403 is forbidden, the user is logged in, but does not have permission
+// to visit that page, ex: most users should not be able to visit admin
+// pages. Need to set up user permissions.
+app.use('/app', checkAuthUser);
+
+// api routes check auth and simply return 401 for unauthorized requests
+app.use('/api', checkAuthAPI);
+app.use('/api/garden', garden);
+app.use('/api/users', users);
+app.use('/api/sensors', sensors);
+app.use('/api/sensorData', sensorData);
+app.use('/api/weather', weather);
 
 // passport config
 const Account = require('./models/account');
