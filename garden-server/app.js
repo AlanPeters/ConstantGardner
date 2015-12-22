@@ -5,12 +5,16 @@ const path         = require('path');
 const logger       = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser   = require('body-parser');
+
+const passport      = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+
 const mongoose     = require('mongoose');
 mongoose.Promise   = require('bluebird');
-mongoose.connect('mongodb://localhost/garden');
 
 const index      = require('./routes/index');
 const garden     = require('./routes/garden');
+const users      = require('./routes/users');
 const sensors    = require('./routes/sensors');
 const sensorData = require('./routes/sensorData');
 const weather    = require('./routes/weather');
@@ -27,13 +31,31 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(require('express-session')({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/garden', garden);
+app.use('/users', users);
 app.use('/sensors', sensors);
 app.use('/sensorData', sensorData);
 app.use('/weather', weather);
+
+// passport config
+const Account = require('./models/account');
+passport.use(new LocalStrategy(Account.authenticate()));
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
+
+mongoose.connect('mongodb://localhost/garden');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
