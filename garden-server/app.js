@@ -38,7 +38,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use('/', index);
+app.use(function(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    } else {
+        return res.redirect('/');
+    }
+});
 app.use('/garden', garden);
 app.use('/users', users);
 app.use('/sensors', sensors);
